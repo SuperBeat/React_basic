@@ -1,0 +1,20 @@
+数组的操作：
+
+const arr = []
+
+
+1.arr.map()
+    map是对数组进行操作的一个方法，它不会改变原数组
+    const arr2 = arr.map((item,index)=>{
+        里面可以根据item和index对arr进行一些操作
+        例：arr里的每一个元素+1
+        return item+1
+    })
+
+2.arr.forEach()
+    forEach是对数组进行遍历，但是没有返回值，也无法改变原数组
+    arr.forEach((item,index)=>{
+        里面可以根据item和index遍历数组
+        例：遍历arr，并将每个元素+1并打印出来
+        console.log(item+1)
+    })
