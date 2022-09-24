@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        /* 
+            1.类中的构造器不是必须要写的，如果想给实例添加一些自己独有的属性，那么就要写构造器；
+            2.如果A类继承了B类，且A类中写了构造器，那么在A类的构造器中必须调用super；
+            3.类中的方法是放在类的原型对象上的，供实例使用，如果是通过实例调用方法，那么方法中的this就是实例对象。
+        */
+        
+        //定义一个Person类
+        class Person {
+            //构造器，构造方法
+            constructor(name,age){
+                //构造器中的this是谁？-----当前类的示例对象
+                this.name = name
+                this.age = age
+            }
+            //一般方法
+            /* 
+                1.speak放在了哪里？-----Person的原型对象上，供实例使用
+                2.speak中的this是谁？-----如果speak是通过Person实例调用的，那么this就是Person的示例对象
+            */
+            speak(){
+                console.log(`我叫${this.name}，我今年${this.age}了`) //里面有实例属性时一定要使用``,而不是单引号，否则属性将被识别为字符串
+            }
+        }
+
+        //定义一个Student类继承于Person类
+        class Student extends Person {
+            constructor(name,age,grade){
+                super(name,age)
+                this.grade = grade
+            }
+            //重写从父类继承过来的方法
+            speak(){
+                console.log(`我叫${this.name}，我今年${this.age}了，我读${this.grade}了`)
+            }
+            /* 
+                1.study放在了哪里？-----Student的原型对象上，供实例使用
+                2.study中的this是谁？-----如果study是通过Student实例调用的，那么this就是Student的示例对象
+            */
+            study(){
+                console.log('我在很努力的学习',this)
+            }
+        }
+        const s1 = new Student('杨',19,'研一')
+        console.log(s1)
+        s1.speak()
+        s1.study()
+
+        /* //创建一个Person的实例对象
+        const person = new Person('刘',18)
+        console.log(person)
+        person.speak() */
+    </script>
+</body>
+</html>
