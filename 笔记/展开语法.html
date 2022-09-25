@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* let arr = [3,4,5,6]
+        console.log(arr)
+        console.log(...arr) //拆包 
+
+        function demo(...params){ //打包
+            console.log('我收到了',params)
+        }
+        demo(1,2,3)
+
+        let arr2 = [1,2,...arr,7,8,9,10]
+        console.log(arr2) */
+
+        let obj = {name:'海峰',age:18,sex:'女'}
+        let obj2 = {xm:'小明',xb:19,nl:'男'}
+        // console.log(...obj)
+        console.log({...obj}) //相当于const cloneObj = {...obj}   console.log(cloneObj)
+        console.log({...obj,...obj2})
+
+    </script>
+</body>
+</html>

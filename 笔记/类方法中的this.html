@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Dog {
+            constructor(name,age){
+               this.name = name;
+                this.age = age;
+            }
+            cry(){
+                console.log(`我叫${this.name},我今年${this.age}了`)
+            }
+        }
+        const d = new Dog("旺财",1)
+        const x = d.cry
+        x()//此处属于cry的直接调用，类中所有定义的方法，浏览器在运行时，全都加上了'use strict'
+    </script>
+    
+</body>
+</html>
