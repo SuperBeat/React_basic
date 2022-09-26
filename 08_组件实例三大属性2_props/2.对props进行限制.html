@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对props进行限制</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src='../js/prop-types.js'></script>
+</head>
+<body>
+    <div id="test"></div>
+    <div id="test2"></div>
+    <script type='text/babel'>
+        //1.定义一个类式组件
+        class Person extends React.Component { 
+            state = {}
+            static propTypes = {
+                name:PropTypes.string.isRequired,
+                age:PropTypes.number,
+                sex:PropTypes.string
+            }     
+            static defaultProps = {
+                age:18
+            } 
+            render(){
+                let {name,sex,age} = this.props
+                return (
+                    <ul>
+                        <li>姓名:{name}</li>    
+                        <li>性别:{sex}</li>    
+                        <li>年龄:{age+1}</li>    
+                    </ul>
+                )
+            }
+            
+        }
+
+        /* Person.propTypes = {
+            name:PropTypes.string.isRequired,
+            age:PropTypes.number,
+            sex:PropTypes.string
+        }
+
+        Person.defaultProps = {
+            age:18
+        } */
+
+        //2.渲染组件到页面
+        ReactDOM.render(<Person name="Tom" sex="男" age={18}/>,document.getElementById('test'))
+
+        //模拟一个服务器返回一个人的数据
+        const p1 = {
+            name:'Jerry',
+            sex:"女",
+            age:19
+        }
+        //分别传递标签属性
+        // ReactDOM.render(<Person name={p1.name} sex={p1.sex} age={p1.age}/>,document.getElementById('test2'))
+
+        //批量传递标签属性
+        //在jsx中可以使用展开语法展开一个对象，但是仅仅适用于传递标签属性
+        ReactDOM.render(<Person {...p1}/>,document.getElementById('test2'))
+    </script>
+</body>
+</html>
