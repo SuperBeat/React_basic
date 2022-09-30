@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            1.对象中的属性名，都是字符串
+            2.对象属性的操作，有两种语法：. []
+        */
+        let a = 'name'
+        let b = 'tom'
+        let person = {} //{name:tom}
+
+        //person.a = b      <=======>     person['a'] = b
+        person[a] = b
+        console.log(person)
+
+        /* 对象简写方式 */
+        let x = 'abcde'
+        let obj = {x} //{x:'abcde'}
+    </script>
+</body>
+</html>

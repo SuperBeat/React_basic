@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test" style="background-color: blueviolet;">我是内容</div>
+    <script>
+        const div = document.getElementById('test')
+
+        //创建一个haha事件
+        const haha = new Event('haha')
+
+        div.addEventListener('haha',()=>{
+            console.log('点击')
+        })
+
+        setTimeout(()=>{
+            div.dispatchEvent(haha)
+        },2000)
+        
+    </script>
+</body>
+</html>
