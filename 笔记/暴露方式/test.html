@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>es6中export对外暴露的三种方式</title>
+</head>
+
+<body>
+    <script type="module">
+
+        //默认暴露，在js里写export default{要暴露的东西，可以是变量，对象，方法}
+        /* 
+            export default {
+                a:10,
+                b:100
+            }
+            就等同于暴露了
+            default:{
+                a:10,
+                b:100
+            }
+
+
+        */
+        import content from "./默认暴露.js"
+        console.log(content.a)
+        content.hello()
+        console.log("***************************************************")
+
+        //部分暴露
+        /* 
+            export let a = 10
+            export var b = function() { }
+            就等同于暴露了
+            {
+                a: 10,
+                b: function(){ }
+            }
+
+        */
+        import { fun, b } from "./部分暴露.js"
+        console.log(b)
+        fun()
+        console.log("***************************************************")
+
+        //整体暴露
+        /* 
+            const a = 10;
+            let b = 10;
+            var c = {
+                age:"18"
+            }
+
+            export {
+                a,
+                b,
+                c
+            }
+            就等同于暴露了
+            {
+                a:10,
+                b:10,
+                c:{
+                    age:18
+                }
+            }
+
+        */
+        import * as content_all from "./整体暴露.js"
+        console.log(content_all.a)
+        console.log(content_all.b)
+        console.log(content_all.c)
+        content_all.f()
+    </script>
+
+</body>
+
+</html>

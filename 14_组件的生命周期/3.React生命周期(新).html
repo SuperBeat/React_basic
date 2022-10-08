@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React生命周期(新)</title>
+    <script src="../js/18.2.0/react.development.js"></script>
+    <script src="../js/18.2.0/react-dom.development.js"></script>
+    <script src="../js/18.2.0/babel.min.js"></script>
+
+    <style>
+        .a{
+            height: 160px;
+            width: 400px;
+            background-color: orange;
+            padding: 10px;
+        }
+        .b{
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="test"></div>
+    <script type='text/babel'>
+
+        class Count extends React.Component {
+            //构造器
+            constructor(){
+                console.log('constructor')
+                super()
+                this.state = {sum:0}
+            }
+
+            //从props中获取派生的状态
+            //当组件中的state完全取决于：外部传来的props时，就要用该钩子
+           /*  static getDerivedStateFromProps(props,state){
+                console.log('getDerivedStateFromProps',props)
+                return {sum:props.a}
+            } */
+
+            getSnapshotBeforeUpdate(){
+                console.log('getSnapshotBeforeUpdate')
+                return {sum:20}
+            }
+
+            componentDidUpdate(prevProps,prevState,snapshotValue){
+                console.log('componentDidUpdate',prevProps,prevState,snapshotValue)
+            }
+
+            //加按钮的回调函数
+            add = ()=>{
+                const {sum} = this.state
+                this.setState({sum:sum+1})
+                console.log(this.state)
+            }
+
+            //卸载按钮的回调函数
+            unmount = ()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+
+            //强制更新一下
+            force = ()=>{
+                this.forceUpdate()
+            }
+
+            
+            render(){
+                console.log('render')
+                return (
+                    <div>
+                        <h1>当前求和为：{this.state.sum}</h1>
+                        <button onClick={this.add}>点我＋1</button>
+                        <button onClick={this.unmount}>点我卸载组价</button>
+                        <button onClick={this.force}>不加不减，强制调用一下render</button>
+                    </div>
+                )
+            }
+
+       }
+
+        class A extends React.Component {
+            state = {carname:'阿特兹'}
+
+            changeCar = ()=>{
+                this.setState({carname:'奔驰'})
+            }
+
+            componentWillReceiveProps(){
+                console.log('A----componentWillReceiveProps')
+            }
+
+            render(){
+                const {carname} = this.state
+                return (
+                    <div className='a'>
+                        <h3>我是A组件，我的车是：{carname}</h3> 
+                        <button onClick={this.changeCar}>换车</button>
+                        <B carname={carname}/>   
+                    </div>
+                ) 
+            }
+        }
+
+        class B extends React.Component {
+
+            componentWillReceiveProps(){
+                console.log('B----componentWillReceiveProps')
+            }
+
+            shouldComponentUpdate(){
+                console.log('B----shouldComponentUpdate')
+                return true
+            }
+
+            componentWillUpdate(){
+                console.log('B----componentWillUpdate')
+            }
+
+            componentDidUpdate(){
+                console.log('B----componentDidUpdate')
+            }
+
+            render(){
+                console.log('B----render')
+                return <h3 className='b'>我是B组件，我收到父亲给我的车是：{this.props.carname}</h3>
+            } 
+        }
+      
+    
+        const test = document.getElementById('test')
+        const root = ReactDOM.createRoot(test);
+        root.render(<Count a={666}/>)
+    </script>
+</body>
+</html>
